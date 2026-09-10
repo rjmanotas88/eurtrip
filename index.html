@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EUROTRIP 2026 — Barcelona · París · Madrid</title>
+  <meta name="description" content="Guía operativa de viaje. 7 viajeros. 3 ciudades. 22 SEP — 02 OCT 2026." />
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#inicio" class="nav__brand">EUROTRIP<span>2026</span></a>
+    <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav__menu" id="navMenu">
+      <a href="#inicio">Inicio</a>
+      <a href="#pasaporte">Pasaporte</a>
+      <a href="#itinerario">Itinerario</a>
+      <a href="#alojamientos">Alojamientos</a>
+      <a href="#traslados">Traslados</a>
+      <a href="#movilidad">Movilidad</a>
+      <a href="#equipaje">Equipaje</a>
+      <a href="#comida">Comida</a>
+      <a href="#seguridad">Seguridad</a>
+      <a href="#clima">Clima</a>
+      <a href="#seguro">Seguro</a>
+      <a href="#compras">Compras</a>
+      <a href="#checklist" class="nav__cta">CHECKLIST</a>
+    </nav>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="inicio">
+    <div class="hero__grid">
+      <div class="hero__main">
+        <p class="hero__kicker">GUÍA OPERATIVA DE VIAJE</p>
+        <h1 class="hero__title">EUROTRIP<br /><span>2026</span></h1>
+        <div class="hero__cities">
+          <span>BARCELONA</span>
+          <span>PARÍS</span>
+          <span>MADRID</span>
+        </div>
+        <p class="hero__dates">22 SEP — 02 OCT 2026</p>
+        <p class="hero__group">GRUPO 1 DE 2 · NOS ENCONTRAMOS EN PARÍS</p>
+      </div>
+      <aside class="hero__meta">
+        <div class="hero__stat"><b>7</b><span>VIAJEROS</span></div>
+        <div class="hero__stat"><b>3</b><span>CIUDADES</span></div>
+        <div class="hero__stat"><b>2</b><span>PAÍSES</span></div>
+      </aside>
+    </div>
+    <div class="hero__route">
+      <span>BOG</span><i>/</i><span>CTG</span><em>→</em>
+      <span>AMS</span><em>→</em>
+      <span>BCN</span><em>→</em>
+      <span>PAR</span><em>→</em>
+      <span>MAD</span><em>→</em>
+      <span>AMS</span><em>→</em>
+      <span>BOG</span>
+    </div>
+  </section>
+
+  <!-- ============ PASAPORTE ============ -->
+  <section class="passport" id="pasaporte">
+    <div class="wrap">
+      <p class="passport__label">MÁXIMA PRIORIDAD</p>
+      <h2 class="passport__title">PASAPORTE<br /><span>SIEMPRE CONTIGO.</span></h2>
+      <p class="passport__lead">Se puede olvidar casi cualquier cosa.<br />El pasaporte no.</p>
+
+      <div class="passport__count">
+        <b>7 PERSONAS</b><i>=</i><b>7 PASAPORTES</b>
+      </div>
+
+      <ul class="passport__rules">
+        <li>Nunca guardar el pasaporte en la maleta facturada.</li>
+        <li>No dejarlo en taxis, restaurantes o bolsillos externos.</li>
+        <li>Revisarlo antes de abandonar cada Airbnb.</li>
+        <li>Revisarlo antes de subir a trenes y vuelos.</li>
+        <li>Mantener copia digital segura del documento.</li>
+      </ul>
+
+      <div class="beforeleave">
+        <h3>ANTES DE SALIR</h3>
+        <div><b>7</b> personas</div>
+        <div><b>7</b> pasaportes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VIAJEROS ============ -->
+  <section class="section" id="viajeros">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">01</span>
+        <h2 class="section__title">Viajeros</h2>
+      </div>
+      <div class="travelers" id="travelers"></div>
+
+      <div class="travelers__summary">
+        <div><b>7</b> viajeros</div>
+        <div><b>7</b> maletas de cabina</div>
+        <div><b>2</b> maletas de 23 kg</div>
+        <div><b>7</b> artículos personales</div>
+      </div>
+      <p class="note">Las dos maletas de 23 kg deben viajar deliberadamente livianas para dejar espacio a las compras del grupo.</p>
+      <p class="note note--plain">Este es el <b>Grupo 1</b> (7 viajeros). Un segundo grupo de 7 personas viaja por su cuenta y coincide con nosotros en <b>París</b>.</p>
+    </div>
+  </section>
+
+  <!-- ============ VUELO DE IDA ============ -->
+  <section class="section section--alt" id="traslados">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">02</span>
+        <h2 class="section__title">Vuelo de ida</h2>
+      </div>
+      <p class="section__sub">Martes 22 de septiembre</p>
+
+      <div class="flightroute" id="flightIda"></div>
+
+      <p class="note">Migración Schengen se realiza en Ámsterdam. Seguir siempre la señalización de conexiones dentro de Schiphol.</p>
+
+      <div class="migration">
+        <h3 class="mini">Recomendaciones de migración</h3>
+        <ul class="list">
+          <li>La primera entrada a Schengen es en Ámsterdam: allí se hace el control migratorio de todo el grupo.</li>
+          <li>Verificar antes de viajar la vigencia de pasaporte exigida para Schengen.</li>
+          <li>Llevar accesible: reservas de los Airbnb, tiquetes de regreso y seguro médico internacional.</li>
+          <li>Poder demostrar fondos suficientes y el motivo del viaje (turismo).</li>
+          <li>Responder de forma breve, clara y tranquila.</li>
+          <li>Mantener el grupo junto en la fila cuando sea posible.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ITINERARIO ============ -->
+  <section class="section" id="itinerario">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">03</span>
+        <h2 class="section__title">Itinerario turístico</h2>
+      </div>
+      <p class="section__sub">Toca cada día para abrir el detalle. No todo es obligación.</p>
+      <div class="itinerary" id="itinerary"></div>
+    </div>
+  </section>
+
+  <!-- ============ TREN BCN → PARÍS ============ -->
+  <section class="section section--alt" id="tren">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">04</span>
+        <h2 class="section__title">Barcelona → París en tren</h2>
+      </div>
+
+      <div class="train">
+        <div class="train__leg">
+          <span class="train__time">16:24</span>
+          <span class="train__place">BARCELONA SANTS</span>
+        </div>
+        <div class="train__mid">
+          <span class="train__op">TGV INOUI 9706</span>
+          <span class="train__dur">6 h 55 min</span>
+        </div>
+        <div class="train__leg">
+          <span class="train__time">23:19</span>
+          <span class="train__place">PARIS GARE DE LYON</span>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div>
+          <h3 class="mini">Recomendaciones para 7 personas</h3>
+          <ul class="list">
+            <li>Llegar a Barcelona Sants con 45–60 min de anticipación.</li>
+            <li>Billete accesible en el celular o impreso.</li>
+            <li>Llevar documento de identidad / pasaporte.</li>
+            <li>Etiquetar las maletas.</li>
+            <li>No separarse dentro de la estación.</li>
+            <li>Identificar coche y asiento antes del andén.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="mini">Equipaje del billete TGV</h3>
+          <p class="list__plain">Máximo por persona:</p>
+          <ul class="list">
+            <li>2 maletas de hasta 90 × 70 × 50 cm</li>
+            <li>1 equipaje de mano de hasta 40 × 30 × 15 cm</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="note note--plain">En <b>París</b> coincidimos con el <b>Grupo 2</b> (otras 7 personas).</p>
+
+      <div class="beforeleave beforeleave--wide">
+        <h3>ANTES DE SUBIR AL TREN</h3>
+        <div><b>7</b> personas</div>
+        <div><b>7</b> pasaportes</div>
+        <div><b>7</b> cabinas</div>
+        <div><b>2</b> maletas grandes</div>
+        <div><b>7</b> artículos personales</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VUELO PARÍS → MADRID ============ -->
+  <section class="section" id="paris-madrid">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">05</span>
+        <h2 class="section__title">París → Madrid</h2>
+      </div>
+      <p class="section__sub">Miércoles 30 de septiembre · Iberia IB0584</p>
+
+      <div class="train">
+        <div class="train__leg">
+          <span class="train__time">07:25</span>
+          <span class="train__place">PARIS ORLY · ORY</span>
+        </div>
+        <div class="train__mid">
+          <span class="train__op">IBERIA IB0584</span>
+          <span class="train__dur">Grupo completo junto</span>
+        </div>
+        <div class="train__leg">
+          <span class="train__time">09:30</span>
+          <span class="train__place">MADRID · MAD · T4</span>
+        </div>
+      </div>
+
+      <p class="note">Cada viajero debe respetar exactamente su franquicia de equipaje contratada. El billete conocido indica tarifa sin equipaje facturado para ese pasajero.</p>
+
+      <ul class="list">
+        <li>Preparar todo el equipaje la noche anterior.</li>
+        <li>Pesar maletas.</li>
+        <li>Dejar la ropa del día lista.</li>
+        <li>Coordinar transporte a Orly previamente.</li>
+        <li>Evaluar taxi / Uber / van frente a transporte público por la hora.</li>
+        <li>Llegar con margen amplio.</li>
+        <li>Evitar combinaciones complejas de RER / metro de madrugada.</li>
+      </ul>
+
+      <div class="beforeleave beforeleave--red">
+        <h3>NOCHE ANTES DE ORLY</h3>
+        <div>PASAPORTES ✓</div>
+        <div>CHECK-IN ✓</div>
+        <div>EQUIPAJE PESADO ✓</div>
+        <div>TRANSPORTE RESERVADO ✓</div>
+        <div>ALARMAS ✓</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ALOJAMIENTOS ============ -->
+  <section class="section section--alt" id="alojamientos">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">06</span>
+        <h2 class="section__title">Alojamientos</h2>
+      </div>
+      <div class="stays" id="stays"></div>
+    </div>
+  </section>
+
+  <!-- ============ MOVILIDAD ============ -->
+  <section class="section" id="movilidad">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">07</span>
+        <h2 class="section__title">Movilidad</h2>
+      </div>
+
+      <div class="philosophy">
+        <div class="philosophy__item">
+          <span class="tag tag--day">DÍA</span>
+          <p>CAMINAR + METRO / RER</p>
+        </div>
+        <div class="philosophy__item">
+          <span class="tag tag--night">NOCHE · CANSANCIO · EQUIPAJE</span>
+          <p>UBER / TAXI</p>
+        </div>
+      </div>
+      <p class="note">Son 7 personas: antes de comprar 7 billetes individuales, comparar el precio con 2 Uber / taxis.</p>
+
+      <div class="cols cols--3">
+        <div>
+          <h3 class="mini">Barcelona</h3>
+          <ul class="list">
+            <li>Caminar como prioridad.</li>
+            <li>Metro / TMB para distancias mayores.</li>
+            <li>Evaluar títulos multiviaje / pases vigentes en 2026.</li>
+            <li>Uber / taxi para el regreso tarde.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="mini">París</h3>
+          <ul class="list">
+            <li>Metro + RER.</li>
+            <li>Alojamiento en Choisy-le-Roi: verificar zonificación.</li>
+            <li>Calcular si un pase diario se amortiza.</li>
+            <li>Uber / taxi de noche o con cansancio.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="mini">Madrid</h3>
+          <ul class="list">
+            <li>Caminar + Metro.</li>
+            <li>Comparar pase turístico vs. multiviaje.</li>
+            <li>Uber / taxi por la noche.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EQUIPAJE ============ -->
+  <section class="section section--alt" id="equipaje">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">08</span>
+        <h2 class="section__title">Equipaje</h2>
+      </div>
+
+      <div class="luggage">
+        <div class="luggage__item"><b>7×</b><span>CABINA 10 KG</span></div>
+        <div class="luggage__item"><b>2×</b><span>BODEGA 23 KG</span></div>
+        <div class="luggage__item"><b>7×</b><span>ARTÍCULO PERSONAL</span></div>
+      </div>
+
+      <div class="bigrule">10 KG = 10 KG</div>
+      <p class="section__sub">No confiarse solo del tamaño. Las aerolíneas pueden pesar el equipaje de cabina. Especial atención en París / Madrid.</p>
+
+      <div class="cols">
+        <div>
+          <h3 class="mini">Recomendaciones</h3>
+          <ul class="list">
+            <li>Llevar báscula portátil de equipaje.</li>
+            <li>Pesar todo la noche anterior a cada vuelo.</li>
+            <li>Verificar límites exactos de cada tarifa.</li>
+            <li>No asumir que una maleta aceptada en un trayecto lo será en otro.</li>
+            <li>No meter pasaporte / documentos esenciales en bodega.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="mini">Compras</h3>
+          <p class="list__plain">Solo hay 2 maletas de 23 kg. Estrategia:</p>
+          <div class="strategy"><span>SALIR LIVIANOS.</span><span>VOLVER CON COMPRAS.</span></div>
+          <ul class="list">
+            <li>Redistribuir peso antes del regreso.</li>
+            <li>Pesar las 7 cabinas.</li>
+            <li>Pesar las 2 maletas grandes.</li>
+            <li>Respetar límites individuales de cada reserva.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMIDA ============ -->
+  <section class="section" id="comida">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">09</span>
+        <h2 class="section__title">Comida — viaje budget</h2>
+      </div>
+
+      <div class="philosophy philosophy--3">
+        <div class="philosophy__item"><span class="tag">MAÑANA</span><p>DESAYUNO EN CASA</p></div>
+        <div class="philosophy__item"><span class="tag">DÍA</span><p>ALMUERZO EN EL RECORRIDO</p></div>
+        <div class="philosophy__item"><span class="tag">NOCHE</span><p>FLEXIBLE</p></div>
+      </div>
+
+      <div class="cols cols--3">
+        <div>
+          <h3 class="mini">Mañana — supermercado</h3>
+          <ul class="list">
+            <li>Huevos, pan, café.</li>
+            <li>Fruta, yogurt, leche, cereal.</li>
+            <li>Jamón / queso, agua.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="mini">Durante el día</h3>
+          <ul class="list">
+            <li>Buscar menú del día / formule / bocadillos / tapas.</li>
+            <li>Evitar restaurantes turísticos en cada comida.</li>
+            <li>Usar panaderías y mercados.</li>
+            <li>Llevar agua.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="mini">Noche — según cansancio</h3>
+          <ul class="list">
+            <li>Snack o supermercado.</li>
+            <li>Cocinar algo sencillo o takeaway.</li>
+            <li>Restaurante solo cuando valga la pena.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="bigrule bigrule--sm">NO TODO TIENE QUE SER RESTAURANTE.</div>
+    </div>
+  </section>
+
+  <!-- ============ COMPRAS ============ -->
+  <section class="section section--alt" id="compras">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">10</span>
+        <h2 class="section__title">Compras</h2>
+      </div>
+      <div class="cols cols--3">
+        <div>
+          <h3 class="mini">Barcelona</h3>
+          <p class="list__plain">Prioridad inicial: El Corte Inglés — Plaça Catalunya. Miércoles 23 si hay energía o integrado al recorrido del centro. El grupo puede dividirse entre compras y paseo por Portal de l'Àngel.</p>
+        </div>
+        <div>
+          <h3 class="mini">París</h3>
+          <p class="list__plain">No reservar bloque específico de compras.</p>
+        </div>
+        <div>
+          <h3 class="mini">Madrid</h3>
+          <p class="list__plain">Gran Vía / Callao. Compras finales antes del regreso.</p>
+        </div>
+      </div>
+      <div class="beforeleave beforeleave--red">
+        <h3>ANTES DE COMPRAR</h3>
+        <div>¿EN QUÉ MALETA VA A REGRESAR?</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CALZADO ============ -->
+  <section class="section" id="calzado">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">11</span>
+        <h2 class="section__title">Calzado</h2>
+      </div>
+      <div class="strategy strategy--big">
+        <span>TENIS.</span><span>BUENA AMORTIGUACIÓN.</span><span>YA USADOS.</span>
+      </div>
+      <p class="section__sub">No estrenar zapatos durante el viaje. Esperar jornadas largas: Barcelona a pie, París, Louvre, Madrid, Segovia.</p>
+      <ul class="list">
+        <li>Tenis tipo walking / running con buena amortiguación.</li>
+        <li>Suela cómoda.</li>
+        <li>Preferiblemente dos pares utilizables si el equipaje lo permite.</li>
+        <li>Medias cómodas.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ CLIMA ============ -->
+  <section class="section section--alt" id="clima">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">12</span>
+        <h2 class="section__title">Clima y qué llevar</h2>
+      </div>
+      <p class="section__sub">Rangos históricos orientativos. Actualizar con el forecast real cuando falten pocos días.</p>
+
+      <div class="climate" id="climate"></div>
+
+      <div class="cols">
+        <div>
+          <h3 class="mini">Estrategia de ropa — capas</h3>
+          <ul class="list">
+            <li>Camiseta.</li>
+            <li>Suéter / buzo fino.</li>
+            <li>Chaqueta ligera, resistente a lluvia / viento.</li>
+            <li>Pantalón largo.</li>
+            <li>Paraguas compacto.</li>
+            <li>Tenis cómodos.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="note note--plain">No se requiere un abrigo pesado de invierno como norma general.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SEGURIDAD ============ -->
+  <section class="section" id="seguridad">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">13</span>
+        <h2 class="section__title">Seguridad y carteristas</h2>
+      </div>
+      <p class="section__sub">Barcelona y París requieren especial atención en zonas turísticas y transporte público.</p>
+      <ul class="list list--2col">
+        <li>Celular no visible innecesariamente.</li>
+        <li>No guardar billetera en bolsillo trasero.</li>
+        <li>Bolsos cerrados y hacia delante en zonas congestionadas.</li>
+        <li>No dejar teléfonos sobre mesas exteriores.</li>
+        <li>Cuidado en metro, estaciones y atracciones.</li>
+        <li>Ignorar distracciones, firmas, pulseras, etc.</li>
+        <li>Repartir tarjetas / dinero entre adultos.</li>
+        <li>Mantener copia digital de documentos.</li>
+        <li>Pasaporte siempre controlado.</li>
+        <li>Si el grupo se divide, fijar punto de encuentro.</li>
+      </ul>
+      <div class="security">
+        <div class="bigrule bigrule--sm">NO ES MIEDO. ES ATENCIÓN.</div>
+        <div class="emergency"><span>EMERGENCIAS EUROPA</span><a href="tel:112">112</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SEGURO ============ -->
+  <section class="section section--alt" id="seguro">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">14</span>
+        <h2 class="section__title">Seguro de viaje</h2>
+      </div>
+      <div class="bigrule bigrule--sm">TODOS DEBEN VIAJAR CON ASISTENCIA MÉDICA INTERNACIONAL ACTIVA.</div>
+      <div class="insurance" id="insurance"></div>
+      <p class="note">No se muestran números de póliza. Los datos de aseguradora y teléfono de asistencia pueden completarse después.</p>
+    </div>
+  </section>
+
+  <!-- ============ CHECKLIST ============ -->
+  <section class="section" id="checklist">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">15</span>
+        <h2 class="section__title">Checklist operativo</h2>
+      </div>
+
+      <div class="cols">
+        <div>
+          <h3 class="mini">Antes de salir de Colombia</h3>
+          <ul class="check" data-list="colombia"></ul>
+        </div>
+        <div>
+          <h3 class="mini">Antes de cambiar de ciudad</h3>
+          <div class="beforeleave beforeleave--wide">
+            <div><b>7</b> personas</div>
+            <div><b>7</b> pasaportes</div>
+            <div><b>7</b> cabinas</div>
+            <div><b>2</b> maletas grandes</div>
+            <div><b>7</b> artículos personales</div>
+          </div>
+          <ul class="check" data-list="ciudad"></ul>
+        </div>
+      </div>
+      <button class="btn btn--outline" id="resetCheck">RESET CHECKLIST</button>
+    </div>
+  </section>
+
+  <!-- ============ MAPA GENERAL ============ -->
+  <section class="section section--alt" id="mapas">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">16</span>
+        <h2 class="section__title">Ruta general</h2>
+      </div>
+      <div id="mapGeneral" class="map map--big"></div>
+      <button class="btn btn--outline" id="osmGeneral">VER EN OPENSTREETMAP</button>
+    </div>
+  </section>
+
+  <!-- ============ RECURSOS ============ -->
+  <section class="section" id="recursos">
+    <div class="wrap">
+      <div class="section__head">
+        <span class="section__num">17</span>
+        <h2 class="section__title">Recursos oficiales</h2>
+      </div>
+      <p class="section__sub">Verificar tarifas, horarios y condiciones vigentes para septiembre / octubre de 2026. No inventar horarios ni precios.</p>
+      <ul class="resources" id="resources"></ul>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="wrap">
+      <p class="footer__big">DISFRUTAR TAMBIÉN ES PARAR.</p>
+      <p class="footer__meta">EUROTRIP 2026 · 7 viajeros · Barcelona · París · Madrid · 22 SEP — 02 OCT 2026</p>
+      <p class="footer__credits">Mapas: OpenStreetMap contributors. Imágenes: Wikimedia Commons.</p>
+    </div>
+  </footer>
+
+  <!-- ============ WIZARD CONTROLS ============ -->
+  <div class="wizardbar" id="wizardBar">
+    <button class="btn btn--outline" id="wizPrev" aria-label="Sección anterior">← ANTERIOR</button>
+    <div class="wizardbar__center">
+      <span class="wizardbar__progress" id="wizProgress">1 / 1</span>
+      <span class="wizardbar__title" id="wizTitle"></span>
+    </div>
+    <button class="btn" id="wizNext" aria-label="Siguiente sección">SIGUIENTE →</button>
+  </div>
+
+  <!-- ============ STICKY ACTIONS (mobile) ============ -->
+  <nav class="sticky" aria-label="Acciones rápidas">
+    <a href="#pasaporte">PASAPORTE</a>
+    <a href="#itinerario">HOY</a>
+    <a href="#checklist">CHECKLIST</a>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
