@@ -4,8 +4,8 @@
 
 const trip = {
   travelers: [
-    { name: "Wadeth de la Ossa", from: "Cartagena", cabin: true, hold: true, personal: true },
-    { name: "Maria Osio", from: "Cartagena", cabin: true, hold: false, personal: true },
+    { name: "Wadeth de la Ossa", from: "Cartagena", cabin: true, hold: false, personal: true },
+    { name: "Maria Osio", from: "Cartagena", cabin: true, hold: true, personal: true },
     { name: "Mario Lambraño", from: "Cartagena", cabin: true, hold: false, personal: true },
     { name: "Mabel de la Ossa", from: "Cartagena", cabin: true, hold: false, personal: true },
     { name: "Vanessa Lambraño", from: "Bogotá", cabin: true, hold: true, personal: true },
@@ -19,6 +19,13 @@ const trip = {
     { time: "10:45 +1", city: "ÁMSTERDAM", detail: "AMS · Schiphol · Conexión 1 h 35 min" },
     { time: "12:20", city: "AMS → BCN", detail: "HV5135 · Operado por Transavia · Boeing 737-800" },
     { time: "14:30", city: "BARCELONA", detail: "Barcelona El Prat" },
+  ],
+
+  flightRegreso: [
+    { time: "06:00", city: "MADRID", detail: "MAD · Barajas · KL1500 · Economy · Clase L" },
+    { time: "08:25", city: "ÁMSTERDAM", detail: "AMS · Schiphol · Conexión 1 h 25 min" },
+    { time: "09:50", city: "AMS → BOG", detail: "KL0741 · Economy · Clase T" },
+    { time: "13:40", city: "BOGOTÁ", detail: "BOG · El Dorado" },
   ],
 
   itinerary: [
@@ -91,12 +98,19 @@ const trip = {
     { city: "Segovia", temp: "8–20 °C", desc: "Mayor altitud: puede ser claramente más fría." },
   ],
 
+  outfits: [
+    { title: "Día templado", temp: "Barcelona · Madrid · mediodía", items: ["tshirt", "pants", "shoes", "cap"] },
+    { title: "Tarde y noche frescas", temp: "París · noches", items: ["tshirt", "sweater", "jacket", "pants", "shoes"] },
+    { title: "Lluvia y viento", temp: "París · imprevistos", items: ["sweater", "jacket", "umbrella", "pants", "shoes"] },
+    { title: "Día frío", temp: "Segovia · altitud", items: ["sweater", "jacket", "scarf", "pants", "shoes"] },
+  ],
+
   insurance: [
     { name: "Mario", ins: "MOK", status: "Confirmado" },
     { name: "Mabel", ins: "MOK", status: "Confirmado" },
     { name: "Roberth", ins: "Colmédica", status: "Confirmado" },
     { name: "Vanessa", ins: "Colmédica", status: "Confirmado" },
-    { name: "Maria", ins: "AXA", status: "Por confirmar" },
+    { name: "Maria", ins: "AXA", status: "Confirmado" },
     { name: "Wadeth", ins: "Pendiente", status: "Pendiente" },
     { name: "Melisa", ins: "Pendiente", status: "Pendiente" },
   ],
@@ -153,9 +167,10 @@ function renderTravelers() {
 }
 
 /* ---------- Flight route ---------- */
-function renderFlight() {
-  const el = $("#flightIda");
-  el.innerHTML = trip.flightIda.map((s) => `
+function renderFlightRoute(sel, data) {
+  const el = $(sel);
+  if (!el) return;
+  el.innerHTML = data.map((s) => `
     <div class="flightroute__stop">
       <div class="flightroute__dot"></div>
       <div class="flightroute__time">${s.time}</div>
@@ -245,6 +260,38 @@ function renderClimate() {
       <div class="climate__temp">${c.temp}</div>
       <div class="climate__desc">${c.desc}</div>
     </div>`).join("");
+}
+
+/* ---------- Outfits ---------- */
+const garments = {
+  tshirt: ["Camiseta", `<path d="M17 8l-9 4 3 7 4-2v19h18V17l4 2 3-7-9-4a7 7 0 0 1-14 0z"/>`],
+  sweater: ["Buzo", `<path d="M16 8 6 12v10l6 2v14h24V24l6-2V12L36 8H16z"/><path d="M18 8a6 6 0 0 0 12 0"/>`],
+  jacket: ["Chaqueta", `<path d="M17 8 7 12l3 8 4-1v19h20V19l4 1 3-8-10-4-5 3-5-3z"/><path d="M24 11v28"/>`],
+  pants: ["Pantalón", `<path d="M14 6h20v10l-3 26h-6l-1-18-1 18h-6l-3-26z"/>`],
+  shoes: ["Tenis", `<path d="M6 30c4 0 6-4 10-4 3 0 5 3 9 4l11 1a3 3 0 0 1 0 6H8a2 2 0 0 1-2-2v-5z"/><path d="M16 26l3 4M21 27l2 3"/>`],
+  umbrella: ["Paraguas", `<path d="M24 6v3M8 24a16 16 0 0 1 32 0zM24 24v13a4 4 0 0 0 8 0"/>`],
+  cap: ["Gorra", `<path d="M8 30c0-9 7-16 16-16s16 7 16 16zM40 30h4"/>`],
+  scarf: ["Bufanda", `<path d="M18 8h12v13a6 6 0 0 1-12 0zM22 34l-4 8M27 34l4 8"/>`],
+};
+
+function renderOutfits() {
+  const el = $("#outfits");
+  if (!el) return;
+  el.innerHTML = trip.outfits.map((o) => {
+    const items = o.items.map((k) => {
+      const [label, path] = garments[k] || ["", ""];
+      return `<div class="outfit__item">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linejoin="round" stroke-linecap="round" role="img" aria-label="${label}">${path}</svg>
+        <span>${label}</span>
+      </div>`;
+    }).join("");
+    return `<div class="outfit">
+      <div class="outfit__title">${o.title}</div>
+      <div class="outfit__temp">${o.temp}</div>
+      <div class="outfit__items">${items}</div>
+    </div>`;
+  }).join("");
 }
 
 /* ---------- Insurance ---------- */
@@ -411,10 +458,12 @@ function initNav() {
 /* ---------- Init ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   renderTravelers();
-  renderFlight();
+  renderFlightRoute("#flightIda", trip.flightIda);
+  renderFlightRoute("#flightRegreso", trip.flightRegreso);
   renderItinerary();
   renderStays();
   renderClimate();
+  renderOutfits();
   renderInsurance();
   renderResources();
   renderChecklist();
